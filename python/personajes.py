@@ -60,3 +60,27 @@ class GreenGoblin(Villano):
     def complicar_reto(self, reto: Reto) -> None:
         # TODO: Complicar reto si es de tipo RetoRutaCorta
         pass
+class Ayudante(Personaje, ABC):
+    def __init__(self, nombre: str, costo_pista: int):
+        super().__init__(nombre)
+        self._costo_pista = costo_pista 
+
+    @abstractmethod
+    def dar_pista(self, m: Mision) -> str:
+        """Método abstracto que debe ser implementado por las subclases"""
+        pass
+
+class Alfred(Ayudante):
+    def __init__(self, pistas: list):
+        super().__init__("Alfred", costo_pista=15) 
+        self.__pistas = pistas 
+
+    def obtener_pista(self, i: int) -> str:
+        if 0 <= i < len(self.__pistas):
+            return self.__pistas[i].getTexto() 
+        return "Pista no disponible."
+
+    def dar_pista(self, m: Mision) -> str:
+        if self.__pistas:
+            return f"Tengo una sugerencia para la misión '{m.id}': {self.obtener_pista(0)}"
+        return "Lo siento, amo Bruce, no tengo pistas para esta misión."
