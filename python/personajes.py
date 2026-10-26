@@ -7,7 +7,7 @@ class Personaje(ABC):
         self.nombre = nombre
 
 
-class Heroe(Personaje):
+class Heroe(Personaje,ABC):
     def __init__(self, nombre: str, saldo: int = 100, intentos_restantes: int = 3):
         super().__init__(nombre)
         self.saldo = saldo
