@@ -4,7 +4,6 @@ public class Batman extends Heroe {
     }
 
     public boolean resolverMision(Mision m, String respuesta) {
-        // TODO: Implementar resolución de misión
         return m.procesarIntento(respuesta);
     }
 }

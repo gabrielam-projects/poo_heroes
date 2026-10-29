@@ -31,7 +31,6 @@ abstract class Heroe <<abstract>> {
 }
 
 class Batman {
-  + Batman()
   + comprarPista(a: Ayudante, m: Mision): Boolean
   + resolverMision(m: Mision, respuesta: String): Boolean
 }
@@ -121,9 +120,6 @@ class Mision {
   - recompensa: Integer
   - errores: Integer = 0
   - {static} LIMITE_ERRORES: Integer = 3
-  + Mision(id: String, reto: Reto)
-  + getEstado(): String
-  + getReto(): Reto
   + consultarIntentosRestantes(): Integer
   + procesarIntento(respuesta: String): Boolean
   + completar(): void
