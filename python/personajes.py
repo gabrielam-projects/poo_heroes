@@ -9,10 +9,9 @@ class Personaje(ABC):
 
 
 class Heroe(Personaje, ABC):
-    def __init__(self, nombre: str, saldo: int = 100, intentos_restantes: int = 3):
+    def __init__(self, nombre: str, saldo: int = 100):
         super().__init__(nombre)
         self.saldo = saldo
-        self.intentos_restantes = intentos_restantes
 
     @abstractmethod
     def consultar_saldo(self) -> int:
@@ -28,8 +27,10 @@ class Heroe(Personaje, ABC):
 
 class Batman(Heroe):
     def __init__(self):
-        super().__init__("Batman", 100, 3)
-        self.errores = 0
+        super().__init__("Batman", 100)
+
+    def consultar_saldo(self) -> int:
+        return self.saldo
 
 
 class Villano(Personaje, ABC):
