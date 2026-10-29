@@ -31,6 +31,9 @@ class Batman(Heroe):
         super().__init__("Batman", 100, 3)
         self.errores = 0
 
+    def consultar_saldo(self) -> int:
+        return self.saldo
+
 
 class Villano(Personaje, ABC):
     def __init__(self, nombre: str, tipo_reto_especialidad: str):
