@@ -5,18 +5,14 @@ skinparam nodesep 60
 skinparam ranksep 60
 skinparam linetype ortho
 
-' ==========================================
-' ENUMERACIONES Y COMPONENTES BASE
-' ==========================================
+
 enum NivelDificultad {
   FACIL
   MEDIO
   DIFICIL
 }
 
-' ==========================================  
-' JERARQUÍA DE PERSONAJES Y VILLANOS
-' ==========================================
+
 abstract class Personaje <<abstract>> {
   # nombre: String
   + getNombre(): String
@@ -24,15 +20,12 @@ abstract class Personaje <<abstract>> {
 
 abstract class Heroe <<abstract>> {
   # saldo: Integer
-  # intentosRestantes: Integer
   + consultarSaldo(): Integer
   + acreditarRecompensa(m: Mision): Boolean
   + pagar(costo: Integer): Boolean
-  + restarIntento(): void
 }
 
 class Batman {
-  - errores: Integer = 0
   + comprarPista(a: Ayudante, m: Mision): Boolean
   + resolverMision(m: Mision, respuesta: String): Boolean
 }
@@ -69,9 +62,7 @@ Villano <|-- Joker
 Villano <|-- GreenGoblin
 Ayudante <|-- Alfred
 
-' ==========================================
-' JERARQUÍA DE RETOS MATEMÁTICOS
-' ==========================================
+
 abstract class Reto <<abstract>> {
   # descripcion: String
   # dificultad: NivelDificultad
@@ -107,9 +98,7 @@ Reto <|-- RetoOrdenamiento
 Reto <|-- RetoRutaCorta
 Reto --> NivelDificultad
 
-' ==========================================
-' ESTRUCTURA DEL JUEGO Y MISIóN
-' ==========================================
+
 class Partida {
   - recompensasGlobales: Integer
   + iniciarJuego(): void
@@ -124,6 +113,7 @@ class Mision {
   + consultarEstado(): String
   + procesarIntento(respuesta: String): Boolean
   + completar(): void
+  + getIntentosRestantes(): Integer
 }
 
 class Pista {
