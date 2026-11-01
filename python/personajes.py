@@ -7,6 +7,15 @@ class Personaje(ABC):
     def __init__(self, nombre: str):
         self.nombre = nombre
 
+class Ayudante(Personaje, ABC):
+    def __init__(self, nombre: str, costo_pista: int):
+        super().__init__(nombre)
+        self._costo_pista = costo_pista
+
+    @abstractmethod
+    def dar_pista(self, m: Mision) -> str:
+        pass
+
 
 class Heroe(Personaje, ABC):
     def __init__(self, nombre: str, saldo: int = 100, intentos_restantes: int = 3):
@@ -25,11 +34,19 @@ class Heroe(Personaje, ABC):
         return False
 
 
-
 class Batman(Heroe):
     def __init__(self):
         super().__init__("Batman", 100, 3)
         self.errores = 0
+
+    def consultar_saldo(self) -> int:
+        return self.saldo
+
+    def comprar_pista(self, a: Ayudante, m: Mision) -> bool:
+        pass
+
+    def resolver_mision(self, mision, respuesta) -> bool:
+        return mision.procesar_intento(respuesta)
 
 
 class Villano(Personaje, ABC):
@@ -73,15 +90,6 @@ class Pista:
     def getTexto(self) -> str:
         return self.__texto
 
-
-class Ayudante(Personaje, ABC):
-    def __init__(self, nombre: str, costo_pista: int):
-        super().__init__(nombre)
-        self._costo_pista = costo_pista
-
-    @abstractmethod
-    def dar_pista(self, m: Mision) -> str:
-        pass
 
 class Alfred(Ayudante):
     def __init__(self, nombre: str, costo_pista: int, pistas_iniciales: List[Pista] = None):
