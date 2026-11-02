@@ -9,7 +9,7 @@ class Mision:
         self.errores = 0  
 
     def procesar_intento(self, respuesta: str) -> bool:
-        if self.estado == "bloqueada":
+        if self.estado != "activa":
             return False
             
         if self.reto.evaluar_respuesta(respuesta):
