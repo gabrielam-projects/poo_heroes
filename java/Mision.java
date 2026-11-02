@@ -6,18 +6,17 @@ public class Mision {
     private String estado;
     private Reto reto;
     private List<String> pistas;
-    private int errores; 
+    private int errores;
 
     public Mision(String id, Reto reto) {
         this.id = id;
         this.reto = reto;
         this.estado = "activa";
         this.pistas = new ArrayList<>();
-        this.errores = 0; 
+        this.errores = 0;
     }
 
     public boolean procesarIntento(String respuesta) {
-        
         if (this.estado.equals("bloqueada")) {
             return false;
         }
@@ -26,7 +25,6 @@ public class Mision {
             completar();
             return true;
         } else {
-           
             this.errores++;
             if (this.errores >= 3) {
                 this.estado = "bloqueada";
@@ -39,8 +37,8 @@ public class Mision {
         this.estado = "completada";
     }
 
-    public String getEstado() {
-        return estado;
+    public int getIntentosRestantes() {
+        return 3 - errores;
     }
 
     public Reto getReto() {
