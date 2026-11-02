@@ -1,10 +1,10 @@
 public class Batman extends Heroe {
 
-    public Batman(String nombre, int saldo) {
-        super(nombre, saldo);
+    public Batman() {
+        super("Batman", 100);
     }
 
-    public void resolverMision(Mision m, String respuesta) {
-        m.procesarIntento(respuesta);
+    public boolean resolverMision(Mision m, String respuesta) {
+        return m.procesarIntento(respuesta);
     }
 }

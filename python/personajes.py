@@ -3,6 +3,7 @@ from retos import Reto, RetoSecuencia
 from mision import Mision
 from typing import List
 
+
 class Personaje(ABC):
     def __init__(self, nombre: str):
         self.nombre = nombre
@@ -27,6 +28,9 @@ class Heroe(Personaje, ABC):
 class Batman(Heroe):
     def __init__(self):
         super().__init__("Batman", 100)
+
+    def resolver_mision(self, mision: Mision, respuesta: str) -> bool:
+        return mision.procesar_intento(respuesta)
 
 
 class Villano(Personaje, ABC):
@@ -64,11 +68,11 @@ class GreenGoblin(Villano):
 
 class Pista:
     def __init__(self, texto: str, precio: int):
-        self.__texto: str = texto
-        self.__precio: int = precio
+        self._texto: str = texto
+        self._precio: int = precio
 
     def getTexto(self) -> str:
-        return self.__texto
+        return self._texto
 
 
 class Ayudante(Personaje, ABC):
@@ -84,15 +88,15 @@ class Ayudante(Personaje, ABC):
 class Alfred(Ayudante):
     def __init__(self, nombre: str, costo_pista: int, pistas_iniciales: List[Pista] = None):
         super().__init__(nombre, costo_pista)
-        self.__pistas: List[Pista] = pistas_iniciales if pistas_iniciales else []
+        self._pistas: List[Pista] = pistas_iniciales if pistas_iniciales else []
 
     def dar_pista(self, m: Mision) -> str:
-        if self.__pistas:
+        if self._pistas:
             return f"Dando pista para la misión: {self.obtener_pista(0)}"
         return "No quedan pistas disponibles."
 
     def obtener_pista(self, i: int) -> str:
         try:
-            return self.__pistas[i].getTexto() 
+            return self._pistas[i].getTexto()
         except IndexError:
             return "Índice de pista no válido."
