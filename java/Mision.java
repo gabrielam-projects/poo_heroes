@@ -18,7 +18,7 @@ public class Mision {
 
     public boolean procesarIntento(String respuesta) {
         
-        if (this.estado.equals("bloqueada")) {
+        if (!this.estado.equals("activa")) {
             return false;
         }
 
