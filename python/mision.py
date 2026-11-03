@@ -26,6 +26,9 @@ class Mision:
             return 0
         return max(0, self.LIMITE_ERRORES - self.errores)
 
+    def consultar_estado(self) -> str:
+        return self.estado
+
     def completar(self) -> None:
         if self.estado == "activa":
             self.estado = "completada"

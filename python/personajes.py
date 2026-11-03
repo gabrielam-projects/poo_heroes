@@ -28,9 +28,12 @@ class Heroe(Personaje, ABC):
 class Batman(Heroe):
     def __init__(self):
         super().__init__("Batman", 100)
-
+        
     def consultar_saldo(self) -> int:
         return self.saldo
+    
+    def resolver_mision(self, mision: Mision, respuesta: str) -> bool:
+        return mision.procesar_intento(respuesta)
 
 
 class Villano(Personaje, ABC):

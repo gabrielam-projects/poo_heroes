@@ -45,6 +45,7 @@ public class Mision {
         }
     }
 
+    public String consultarEstado() { return estado; }
     public String getEstado() { return estado; }
     public Reto getReto() { return reto; }
 }

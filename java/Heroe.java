@@ -1,9 +1,11 @@
 public abstract class Heroe extends Personaje {
     protected int saldo;
+    protected int intentosRestantes;
 
-    public Heroe(String nombre, int saldo) {
+    public Heroe(String nombre, int saldo, int intentosRestantes) {
         super(nombre);
         this.saldo = saldo;
+        this.intentosRestantes = intentosRestantes;
     }
 
     public int consultarSaldo() {
@@ -18,4 +20,9 @@ public abstract class Heroe extends Personaje {
         return false;
     }
 
+    public void restarIntento() {
+        if (intentosRestantes > 0) {
+            intentosRestantes--;
+        }
+    }
 }
