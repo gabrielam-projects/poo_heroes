@@ -32,6 +32,11 @@ public class Mision {
         return false;
     }
 
+    public boolean aplicarDificultad(Dificultad dificultad) {
+        if (!estado.equals("activa")) return false;
+        return dificultad.aplicar(reto);
+    }
+
     public int consultarIntentosRestantes() {
         if (!"activa".equals(estado)) {
             return 0;

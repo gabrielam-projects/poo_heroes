@@ -64,3 +64,37 @@ Bienvenido al repositorio del caso de estudio de la Unidad II. Este código base
 - Puedes agregar clases concretas o métodos privados, pero NO puedes modificar las firmas de los métodos en las clases abstractas o interfaces ya definidas.
 - Sube tus cambios y abre un Pull Request (PR).
 - Solicita la revisión de al menos dos compañeros de clase. Una vez aprobada por ellos, la profesora hará el merge final.
+
+## Ruta corta y Green Goblin
+
+El reto usa estos caminos (se puede pasar en ambos sentidos):
+
+| Tramo | Costo |
+|---|---|
+| A-B | 2 |
+| A-C | 5 |
+| B-C | 1 |
+| B-D | 4 |
+| C-D | 2 |
+
+Se usa Dijkstra para encontrar el costo menor, desde A hasta D.
+
+- Ruta correcta: A-B-C-D, costo 5.
+- A-B-D cuesta 6, así que no es la mejor al inicio.
+- Green Goblin bloquea B-C y la nueva ruta correcta es A-B-D, costo 6.
+- Si bloquear un tramo deja el destino sin acceso, se cancela el bloqueo.
+- Mision revisa que esté activa antes de aplicar Dificultad. No se cambió la firma aplicar(Reto).
+
+Pruebas de Python:
+
+```bash
+python -m unittest discover -s python -p "test_ruta_corta.py" -v
+```
+
+Pruebas de Java:
+
+```bash
+cd java
+javac NivelDificultad.java Personaje.java Reto.java RetoSecuencia.java Dificultad.java Mision.java Villano.java RetoRutaCorta.java GreenGoblin.java TestRutaCorta.java
+java TestRutaCorta
+```

@@ -47,6 +47,8 @@ class Joker {
 
 class GreenGoblin {
   + complicarReto(r: Reto): void
+  + aplicar(r: Reto): Boolean
+  + plantearMision(id: String, r: Reto): Mision
 }
 
 abstract class Ayudante <<abstract>> {
@@ -93,9 +95,12 @@ class RetoOrdenamiento {
 }
 
 class RetoRutaCorta {
-  - grafoNodos: String
+  - grafo: Map<String, Map<String, Integer>>
   - origen: String
   - destino: String
+  + agregarTramo(a: String, b: String, costo: Integer): void
+  + costoMinimo(): Long
+  + bloquearTramo(a: String, b: String): Boolean
   + evaluarRespuesta(respuesta: String): Boolean
   + generarProblema(): void
 }
@@ -103,6 +108,11 @@ class RetoRutaCorta {
 Reto <|-- RetoSecuencia
 Reto <|-- RetoOrdenamiento
 Reto <|-- RetoRutaCorta
+
+interface Dificultad {
+  + aplicar(r: Reto): Boolean
+}
+GreenGoblin ..|> Dificultad
 Reto --> NivelDificultad
 
 ' ==========================================
@@ -123,6 +133,7 @@ class Mision {
   + consultarEstado(): String
   + getEstado(): String
   + consultarIntentosRestantes(): Integer
+  + aplicarDificultad(d: Dificultad): Boolean
   + procesarIntento(respuesta: String): Boolean
   + completar(): void
 }
@@ -135,6 +146,7 @@ class Pista {
 
 Partida "1" *-- "0..*" Mision : coordina >
 Mision "1" *-- "1" Reto : contiene >
+Mision ..> Dificultad
 Mision "1" *-- "0..*" Pista : ofrece >
 
 ' RELACIONES DE INTERACCIÓN
