@@ -1,5 +1,7 @@
 from abc import ABC, abstractmethod
 from retos import Reto, RetoSecuencia
+from reto_ruta_corta import RetoRutaCorta
+from dificultad import Dificultad
 from mision import Mision
 from typing import List
 
@@ -60,13 +62,24 @@ class Joker(Villano):
             print("¡El Joker ha complicado la secuencia numérica!")
 
 
-class GreenGoblin(Villano):
-    def __init__(self):
+class GreenGoblin(Villano, Dificultad):
+    def __init__(self, a="B", b="C"):
         super().__init__("Green Goblin", "RetoRutaCorta")
+        self.a = a
+        self.b = b
 
-    def complicar_reto(self, reto: Reto) -> None:
-        # TODO: Complicar reto si es de tipo RetoRutaCorta
-        pass
+    def aplicar(self, reto):
+        if not isinstance(reto, RetoRutaCorta):
+            return False
+        return reto.bloquear_tramo(self.a, self.b)
+
+    def complicar_reto(self, reto):
+        self.aplicar(reto)
+
+    def plantear_mision(self, id_mision, reto):
+        mision = Mision(id_mision, reto)
+        mision.aplicar_dificultad(self)
+        return mision
 
 
 class Pista:

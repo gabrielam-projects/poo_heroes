@@ -21,6 +21,11 @@ class Mision:
             self.estado = "bloqueada"
         return False
 
+    def aplicar_dificultad(self, dificultad):
+        if self.estado != "activa":
+            return False
+        return dificultad.aplicar(self.reto)
+
     def consultar_intentos_restantes(self) -> int:
         if self.estado != "activa":
             return 0
