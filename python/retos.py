@@ -25,11 +25,30 @@ class RetoSecuencia(Reto):
     def __init__(self, dificultad: NivelDificultad):
         super().__init__("Completar la secuencia numérica", dificultad)
         self.patron_numerico = []
-
-    def evaluar_respuesta(self, respuesta: str) -> bool:
-        # TODO: Implementar la validación de la respuesta
-        return False
+        self.respuesta_esperada = 0
+        self.generar_problema()
 
     def generar_problema(self) -> None:
-        # TODO: Generar patrón según la dificultad
-        pass
+        if self.dificultad == NivelDificultad.FACIL:
+            self.patron_numerico = [2, 4, 6, 8]
+            self.respuesta_esperada = 10
+        elif self.dificultad == NivelDificultad.MEDIO:
+            self.patron_numerico = [3, 6, 12, 24]
+            self.respuesta_esperada = 48
+        else:
+            self.patron_numerico = [2, 3, 5, 8]
+            self.respuesta_esperada = 13
+
+    def mostrar_secuencia(self) -> str:
+        return ", ".join(str(n) for n in self.patron_numerico) + ", ?"
+
+    def evaluar_respuesta(self, respuesta: str) -> bool:
+        if not isinstance(respuesta, str):
+            return False
+        texto = respuesta.strip()
+        if not texto.isascii() or not texto.isdigit():
+            return False
+        try:
+            return int(texto) == self.respuesta_esperada
+        except ValueError:
+            return False
