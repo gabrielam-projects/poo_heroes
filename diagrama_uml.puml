@@ -82,8 +82,11 @@ abstract class Reto <<abstract>> {
 
 class RetoSecuencia {
   - patronNumerico: List<Integer>
+  - secuenciaIncompleta: List<Integer>
+  - respuestaCorrecta: Integer
   + evaluarRespuesta(respuesta: String): Boolean
   + generarProblema(): void
+  + getSecuenciaIncompleta(): List<Integer>
 }
 
 class RetoOrdenamiento {
