@@ -64,3 +64,26 @@ Bienvenido al repositorio del caso de estudio de la Unidad II. Este código base
 - Puedes agregar clases concretas o métodos privados, pero NO puedes modificar las firmas de los métodos en las clases abstractas o interfaces ya definidas.
 - Sube tus cambios y abre un Pull Request (PR).
 - Solicita la revisión de al menos dos compañeros de clase. Una vez aprobada por ellos, la profesora hará el merge final.
+
+## Recompensas de las misiones (T06)
+
+Cada misión tiene una recompensa. Si no se indica el monto al crearla, vale 10 créditos.
+
+- **Mision:** guarda el monto y si la recompensa ya se entregó.
+- **Heroe:** recibe los créditos solamente si la misión está completada y no se han cobrado antes. En ese caso `acreditarRecompensa` devuelve `true`; si no, devuelve `false`.
+- **Partida:** llama al héroe para entregar la recompensa y suma al total `recompensasGlobales` solamente cuando el pago se hizo. La misión tiene que estar agregada a esa partida.
+
+Por ejemplo, si Batman empieza con 100 créditos y completa una misión que paga 30, después de cobrar queda con 130 y el total de la partida pasa a 30. Si intenta cobrarla de nuevo, ambos números se quedan igual. Una misión activa o bloqueada no paga nada.
+
+Pruebas de Python desde la raíz:
+
+```bash
+python -m unittest discover -s python -p "test_recompensa_mision.py" -v
+```
+
+Pruebas de Java desde `java/`:
+
+```bash
+javac NivelDificultad.java Personaje.java Reto.java Heroe.java Batman.java Mision.java Partida.java TestRecompensaMision.java
+java TestRecompensaMision
+```
