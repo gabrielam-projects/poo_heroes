@@ -10,6 +10,10 @@ Bienvenido al repositorio del caso de estudio de la Unidad II. Este código base
 - **Límite y Bloqueo:** Al alcanzar el límite establecido (3 errores), la misión cambia su estado a `bloqueada`.
 - **Rechazo de Intentos:** Todo cuarto intento posterior sobre una misión bloqueada debe ser rechazado de forma inmediata sin procesarse.
 - **Recompensas Únicas:** La recompensa correspondiente se calcula y acredita **una sola vez** al completar exitosamente la misión.
+- **Responsabilidades del Ciclo de Recompensa:**
+    - `Mision` es dueña del monto (`recompensa`, un entero mayor que cero fijado al crearla) y registra si ya fue pagada (`recompensaAcreditada`) mediante `marcarRecompensaAcreditada()`, que devuelve `true` solo si la misión está `completada` y aún no se había pagado.
+    - `Heroe.acreditarRecompensa(m)` suma el monto al saldo únicamente cuando `Mision` confirma la primera acreditación y devuelve `true` solo en ese caso. Si la misión está `activa` o `bloqueada`, ya fue acreditada, o es nula, devuelve `false` y no cambia el saldo.
+    - `Partida.acreditarRecompensa(h, m)` coordina el proceso: solo acepta misiones que pertenecen a la partida y aumenta `recompensasGlobales` únicamente cuando el héroe devuelve `true`. Una misma misión no puede recompensar a otro héroe ni incrementar los totales por una llamada repetida.
 
 ---
 
@@ -29,6 +33,7 @@ Bienvenido al repositorio del caso de estudio de la Unidad II. Este código base
 - **Contenedor Principal (`Partida`):** Actúa como el orquestador central del juego. Administra una colección de objetos `Mision` mediante una relación de composición (una misión no existe de forma independiente fuera de la partida).
 - **Composición Interna:** Cada objeto `Mision` encapsula exactamente un `Reto` y puede contener cero o más objetos `Pista`.
 - **Configuración Dinámica:** Una partida puede configurarse agregando misiones de forma flexible que contengan retos de distinta naturaleza y con diversos niveles de dificultad.
+- **Acumulado de Recompensas:** `recompensasGlobales` solo suma las recompensas realmente acreditadas, sin duplicados (consultable con `getRecompensasGlobales()`).
 
 ---
 
@@ -56,6 +61,7 @@ Bienvenido al repositorio del caso de estudio de la Unidad II. Este código base
 ## 6. Interacción de Héroes y Ayudantes
 
 - **Resolución de Misiones:** El `Heroe` (por ejemplo, *Batman*) interactúa con el sistema para resolver misiones, consumiendo intentos y administrando un saldo de créditos.
+- **Cobro de Recompensas:** Al completar una misión, el héroe recibe su recompensa en el saldo mediante `acreditarRecompensa(m: Mision): Boolean`, coordinado por `Partida` (ver sección 1).
 - **Sistema de Pistas:** El héroe puede solicitar asistencia a un `Ayudante` (por ejemplo, *Alfred*), quien le provee objetos `Pista` a cambio de un costo predefinido en el catálogo.
 
 ## Instrucciones para Estudiantes (GitHub Flow)
