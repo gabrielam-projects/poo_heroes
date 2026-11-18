@@ -20,6 +20,12 @@ public abstract class Heroe extends Personaje {
         return false;
     }
 
+    public boolean acreditarRecompensa(Mision mision) {
+        if (mision == null || !mision.marcarRecompensaAcreditada()) return false;
+        saldo += mision.getRecompensa();
+        return true;
+    }
+
     public void restarIntento() {
         if (intentosRestantes > 0) {
             intentosRestantes--;

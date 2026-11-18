@@ -14,6 +14,15 @@ public class Partida {
         misiones.add(m);
     }
 
+    public boolean acreditarRecompensa(Heroe heroe, Mision mision) {
+        if (heroe == null || mision == null || !misiones.contains(mision)) return false;
+        if (!heroe.acreditarRecompensa(mision)) return false;
+        recompensasGlobales += mision.getRecompensa();
+        return true;
+    }
+
+    public int getRecompensasGlobales() { return recompensasGlobales; }
+
     public void iniciarJuego() {
         // TODO: Implementar inicio del juego
     }

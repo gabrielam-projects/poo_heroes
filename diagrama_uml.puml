@@ -112,16 +112,24 @@ class Partida {
   - recompensasGlobales: Integer
   + iniciarJuego(): void
   + agregarMision(m: Mision): void
+  + acreditarRecompensa(h: Heroe, m: Mision): Boolean
+  + getRecompensasGlobales(): Integer
 }
 
 class Mision {
   - id: String
   - estado: String = "activa"
   - recompensa: Integer
+  - recompensaAcreditada: Boolean = false
   - errores: Integer = 0
   - {static} LIMITE_ERRORES: Integer = 3
+  + Mision(id: String, reto: Reto)
+  + Mision(id: String, reto: Reto, recompensa: Integer)
   + consultarEstado(): String
   + getEstado(): String
+  + getRecompensa(): Integer
+  + isRecompensaAcreditada(): Boolean
+  + marcarRecompensaAcreditada(): Boolean
   + consultarIntentosRestantes(): Integer
   + procesarIntento(respuesta: String): Boolean
   + completar(): void
@@ -134,6 +142,7 @@ class Pista {
 }
 
 Partida "1" *-- "0..*" Mision : coordina >
+Partida ..> Heroe : acredita recompensa >
 Mision "1" *-- "1" Reto : contiene >
 Mision "1" *-- "0..*" Pista : ofrece >
 
