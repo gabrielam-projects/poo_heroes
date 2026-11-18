@@ -23,6 +23,13 @@ class Heroe(Personaje, ABC):
             return True
         return False
 
+    def acreditar_recompensa(self, mision: Mision) -> bool:
+        # True solo en la primera acreditación de una misión completada
+        if mision is None or not mision.marcar_recompensa_acreditada():
+            return False
+        self.saldo += mision.recompensa
+        return True
+
 
 
 class Batman(Heroe):
